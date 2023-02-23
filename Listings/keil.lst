@@ -1,0 +1,77 @@
+A51 MACRO ASSEMBLER  KEIL                                                                 12/29/2022 00:43:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\keil.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE keil.asm SET(SMALL) DEBUG PRINT(.\Listings\keil.lst) OBJECT(.\Objects\k
+                      eil.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0h
+0000 7438              2     MOV A,#38H
+0002 112A              3     ACALL COMNWRT
+0004 1144              4     ACALL DELAY
+0006 740E              5     MOV A,#0EH
+0008 112A              6     ACALL COMNWRT
+000A 1144              7     ACALL DELAY
+000C 7401              8     MOV A, #01
+000E 112A              9     ACALL COMNWRT
+0010 1144             10     ACALL DELAY
+0012 7406             11     MOV A,#06H
+0014 112A             12     ACALL COMNWRT
+0016 1144             13     ACALL DELAY
+0018 7484             14     MOV A,#84H
+001A 112A             15     ACALL COMNWRT
+001C 1144             16     ACALL DELAY
+001E 744E             17     MOV A,#'N'
+0020 1137             18     ACALL DATAWRT
+0022 1144             19     ACALL DELAY
+0024 744F             20     MOV A,#'O'
+0026 1137             21     ACALL DATAWRT
+0028 80FE             22     AGAIN : SJMP AGAIN
+002A                  23     COMNWRT:
+002A F590             24                     MOV p1,a
+002C C2A0             25                     CLR P2.0
+002E C2A1             26                     CLR P2.1
+0030 D2A2             27                     SETB P2.2
+0032 1144             28                     ACALL DELAY
+0034 C2A2             29                     CLR P2.2
+0036 22               30                     RET
+                      31                     
+0037                  32     DATAWRT:
+0037 F590             33             MOV P1,A
+0039 D2A0             34             SETB P2.0
+003B C2A1             35             CLR P2.1
+003D D2A2             36             SETB P2.2
+003F 1144             37             ACALL DELAY
+0041 C2A2             38             CLR P2.2
+0043 22               39             RET
+0044 7B32             40     DELAY: MOV R3,#50
+0046 7CFF             41     HERE2 : MOV R4,#255
+0048 DCFE             42     HERE : DJNZ R4,HERE
+004A DBFA             43                DJNZ R3,HERE2
+004C 22               44     RET 
+                      45     END
+A51 MACRO ASSEMBLER  KEIL                                                                 12/29/2022 00:43:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0028H   A   
+COMNWRT. . . . . .  C ADDR   002AH   A   
+DATAWRT. . . . . .  C ADDR   0037H   A   
+DELAY. . . . . . .  C ADDR   0044H   A   
+HERE . . . . . . .  C ADDR   0048H   A   
+HERE2. . . . . . .  C ADDR   0046H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

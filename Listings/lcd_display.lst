@@ -1,0 +1,289 @@
+A51 MACRO ASSEMBLER  LCD_DISPLAY                                                          12/30/2022 08:47:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lcd_display.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lcd_display.asm SET(SMALL) DEBUG PRINT(.\Listings\lcd_display.lst) OBJE
+                      CT(.\Objects\lcd_display.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000h
+                       2     
+                       3     
+0000 7438              4     MOV A,#38H ;use 2 lines & 5*7
+0002 3163              5     ACALL COMNWRT
+0004 740E              6     MOV A,#0EH ;cursor blinking off
+0006 3163              7     ACALL COMNWRT
+0008 7480              8     MOV A , #80H ;FORCE CURSOR TO FIRST LINE
+000A 3163              9     ACALL COMNWRT
+                      10     
+000C 7401             11     MOV A, #01H 
+000E 3163             12     ACALL COMNWRT
+0010 758901           13     MOV TMOD, #01h
+0013 7B01             14     MOV R3,#1H
+0015 8B80             15     MOV P0,R3
+                      16     
+0017 7A10             17     MOV R2,#16
+0019 9000E3           18     MOV DPTR,#STR
+                      19     ;JZ REV
+                      20     
+001C 7400             21     MSG:    MOV A,#00H
+001E 93               22                     MOVC A,@A+DPTR
+                      23                     ;JZ FINISH
+001F 316E             24                     ACALL DATAWRT
+0021 A3               25                     INC DPTR
+0022 DAF8             26                     DJNZ R2,MSG
+                      27                     
+                      28                     
+0024 3179             29     ACALL DELAY
+0026 3179             30     ACALL DELAY
+0028 74C0             31     MOV A ,#0C0H 
+002A 3163             32     ACALL COMNWRT
+                      33     
+                      34     
+                      35                     
+                      36     
+                      37     
+002C 7A10             38     MOV R2,#16
+002E 9000F3           39     MOV DPTR,#ANS
+0031 7400             40     MSG2:   MOV A,#00H
+0033 93               41                     MOVC A,@A+DPTR
+                      42                     ;JZ FINISH
+0034 316E             43                     ACALL DATAWRT
+0036 A3               44                     INC DPTR
+0037 DAF8             45                     DJNZ  R2,MSG2
+                      46                     
+0039 3179             47     ACALL DELAY
+003B 3179             48     ACALL DELAY     
+                      49     
+003D EB               50     MOV A,R3
+003E 75F002           51     MOV B,#2H
+0041 A4               52     MUL AB
+0042 F580             53     MOV P0,A
+0044 FB               54     MOV R3,A
+                      55     
+0045 7401             56     MOV A, #01H 
+0047 3163             57     ACALL COMNWRT
+A51 MACRO ASSEMBLER  LCD_DISPLAY                                                          12/30/2022 08:47:20 PAGE     2
+
+0049 7480             58     MOV A ,#80H 
+004B 3163             59     ACALL COMNWRT
+004D 7A10             60     MOV R2,#16
+004F 900103           61     MOV DPTR,#NEXT
+0052 7400             62     MSG3:   MOV A,#00H
+0054 93               63                     MOVC A,@A+DPTR
+                      64                     ;JZ FINISH
+0055 316E             65                     ACALL DATAWRT
+0057 A3               66                     INC DPTR
+0058 DAF8             67                     DJNZ R2,MSG3
+                      68                     
+                      69     
+005A 74C0             70     MOV A ,#0C0H 
+005C 3163             71     ACALL COMNWRT
+                      72     
+005E 3179             73     ACALL DELAY
+0060 3179             74     ACALL DELAY     
+                      75     
+                      76     ;PROCESS4:
+0062 7A10             77     MOV R2,#16
+0064 900113           78     MOV DPTR,#ANS2
+0067 7400             79     MSG4:   MOV A,#00H
+0069 93               80                     MOVC A,@A+DPTR
+006A 316E             81                     ACALL DATAWRT
+006C A3               82                     INC DPTR
+006D DAF8             83                     DJNZ  R2,MSG4
+                      84     
+006F 3179             85     ACALL DELAY
+0071 3179             86     ACALL DELAY
+                      87     
+0073 EB               88     MOV A,R3
+0074 75F002           89     MOV B,#2H
+0077 A4               90     MUL AB
+0078 F580             91     MOV P0,A
+007A FB               92     MOV R3,A
+007B 7401             93     MOV A, #01H 
+007D 3163             94     ACALL COMNWRT
+007F 7480             95     MOV A ,#80H 
+0081 3163             96     ACALL COMNWRT
+                      97     
+0083 7A10             98     MOV R2,#16
+0085 900133           99     MOV DPTR,#CLN1
+0088 7400            100     MSG5:   MOV A,#00H
+008A 93              101                     MOVC A,@A+DPTR
+                     102                     ;JZ FINISH
+008B 316E            103                     ACALL DATAWRT
+008D A3              104                     INC DPTR
+008E DAF8            105                     DJNZ  R2,MSG5
+                     106                     
+0090 3179            107     ACALL DELAY
+0092 3179            108     ACALL DELAY
+0094 74C0            109     MOV A ,#0C0H 
+0096 3163            110     ACALL COMNWRT
+                     111     
+0098 3179            112     ACALL DELAY
+009A 3179            113     ACALL DELAY     
+                     114     
+                     115     
+009C 7A10            116     MOV R2,#16
+009E 900123          117     MOV DPTR,#CLN2
+00A1 7400            118     MSG6:   MOV A,#00H
+00A3 93              119                     MOVC A,@A+DPTR
+                     120                     ;JZ FINISH
+00A4 316E            121                     ACALL DATAWRT
+00A6 A3              122                     INC DPTR
+00A7 DAF8            123                     DJNZ  R2,MSG6
+A51 MACRO ASSEMBLER  LCD_DISPLAY                                                          12/30/2022 08:47:20 PAGE     3
+
+                     124     
+00A9 3179            125     ACALL DELAY
+00AB 3179            126     ACALL DELAY
+00AD 7401            127     MOV A, #01H 
+00AF 3163            128     ACALL COMNWRT
+00B1 7480            129     MOV A ,#80H 
+00B3 3163            130     ACALL COMNWRT
+                     131     
+00B5 EB              132     MOV A,R3
+00B6 75F002          133     MOV B,#2H
+00B9 A4              134     MUL AB
+00BA F580            135     MOV P0,A
+00BC FB              136     MOV R3,A
+                     137     
+00BD 7A10            138     MOV R2,#16
+00BF 900143          139     MOV DPTR,#FIN
+00C2 7400            140     FINISH: MOV A,#00H
+00C4 93              141                     MOVC A,@A+DPTR
+                     142                     ;JZ AGAIN
+00C5 316E            143                     ACALL DATAWRT
+00C7 A3              144                     INC DPTR
+00C8 DAF8            145                     DJNZ  R2,FINISH
+                     146                     
+00CA 74C0            147     MOV A ,#0C0H 
+00CC 3163            148     ACALL COMNWRT
+                     149     
+00CE 3179            150     ACALL DELAY
+00D0 3179            151     ACALL DELAY     
+                     152     
+00D2 7A10            153     MOV R2,#16
+00D4 900153          154     MOV DPTR,#FIN2
+00D7 7400            155     FINISH2:    MOV A,#00H
+00D9 93              156                             MOVC A,@A+DPTR
+00DA 6005            157                             JZ AGAIN
+00DC 316E            158                             ACALL DATAWRT
+00DE A3              159                             INC DPTR
+00DF DAF6            160                             DJNZ  R2,FINISH2
+00E1 80FE            161     AGAIN: SJMP AGAIN
+                     162                     
+00E3 43757272        163     STR:  DB 'Current ','Station '
+00E7 656E7420                
+00EB 53746174                
+00EF 696F6E20                
+00F3 42484F50        164     ANS:  DB 'BHOPAL Junction ' 
+00F7 414C204A                
+00FB 756E6374                
+00FF 696F6E20                
+0103 20204E65        165     NEXT: DB '  Next Station  ' 
+0107 78742053                
+010B 74617469                
+010F 6F6E2020                
+0113 4E414750        166     ANS2: DB 'NAGPUR Junction '
+0117 5552204A                
+011B 756E6374                
+011F 696F6E20                
+0123 4B656570        167     CLN2: DB 'Keep Train Clean'
+0127 20547261                
+012B 696E2043                
+012F 6C65616E                
+0133 20446F20        168     CLN1: DB ' Do Not Litter  '     
+0137 4E6F7420                
+013B 4C697474                
+013F 65722020                
+0143 53544154        169     FIN: DB 'STATION ARRIVED '
+0147 494F4E20                
+014B 41525249                
+A51 MACRO ASSEMBLER  LCD_DISPLAY                                                          12/30/2022 08:47:20 PAGE     4
+
+014F 56454420                
+0153 57656C63        170     FIN2: DB 'WelcomeTo NAGPUR'
+0157 6F6D6554                
+015B 6F204E41                
+015F 47505552                
+                     171             
+                     172     
+                     173     
+                     174     
+0163                 175     COMNWRT:
+0163 3183            176                     ACALL DISPLAY
+0165 F590            177                     MOV P1,A
+0167 C2A1            178                     CLR P2.1
+0169 D2A2            179                     SETB P2.2
+016B C2A2            180                     CLR P2.2
+016D 22              181                     RET
+                     182                     
+016E                 183     DATAWRT:
+016E 3183            184             ACALL DISPLAY ;MOVE DATA TO LCD
+0170 F590            185             MOV P1,A
+0172 D2A1            186             SETB P2.1
+0174 D2A2            187             SETB P2.2
+0176 C2A2            188             CLR P2.2
+0178 22              189             RET
+                     190             
+0179 780E            191     DELAY:          MOV R0, #14
+017B 758A00          192                             MOV Tl0, #00h
+017E 758C00          193                             MOV TH0, #00h
+0181 D28C            194                             SETB TR0
+                     195     
+                     196     
+0183 78FF            197     DISPLAY: MOV R0,#0FFH
+0185 79FF            198     HERE1: MOV R1,#0FFH
+0187 D9FE            199     HERE2: DJNZ R1,HERE2
+0189 D8FA            200                DJNZ R0,HERE1
+018B 22              201                RET 
+                     202             
+                     203     
+                     204     END
+A51 MACRO ASSEMBLER  LCD_DISPLAY                                                          12/30/2022 08:47:20 PAGE     5
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   00E1H   A   
+ANS. . . . . . . .  C ADDR   00F3H   A   
+ANS2 . . . . . . .  C ADDR   0113H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CLN1 . . . . . . .  C ADDR   0133H   A   
+CLN2 . . . . . . .  C ADDR   0123H   A   
+COMNWRT. . . . . .  C ADDR   0163H   A   
+DATAWRT. . . . . .  C ADDR   016EH   A   
+DELAY. . . . . . .  C ADDR   0179H   A   
+DISPLAY. . . . . .  C ADDR   0183H   A   
+FIN. . . . . . . .  C ADDR   0143H   A   
+FIN2 . . . . . . .  C ADDR   0153H   A   
+FINISH . . . . . .  C ADDR   00C2H   A   
+FINISH2. . . . . .  C ADDR   00D7H   A   
+HERE1. . . . . . .  C ADDR   0185H   A   
+HERE2. . . . . . .  C ADDR   0187H   A   
+MSG. . . . . . . .  C ADDR   001CH   A   
+MSG2 . . . . . . .  C ADDR   0031H   A   
+MSG3 . . . . . . .  C ADDR   0052H   A   
+MSG4 . . . . . . .  C ADDR   0067H   A   
+MSG5 . . . . . . .  C ADDR   0088H   A   
+MSG6 . . . . . . .  C ADDR   00A1H   A   
+NEXT . . . . . . .  C ADDR   0103H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+STR. . . . . . . .  C ADDR   00E3H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

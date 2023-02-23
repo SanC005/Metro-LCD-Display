@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\lcd_display.obj" 
+TO ".\Objects\keil" 
+PRINT(".\Listings\keil.m51")

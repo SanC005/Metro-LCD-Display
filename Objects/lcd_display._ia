@@ -1,0 +1,1 @@
+"lcd_display.asm" SET (SMALL) DEBUG PRINT(.\Listings\lcd_display.lst) OBJECT(.\Objects\lcd_display.obj) EP

@@ -1,0 +1,1 @@
+"keil.asm" SET (SMALL) DEBUG PRINT(.\Listings\keil.lst) OBJECT(.\Objects\keil.obj) EP
